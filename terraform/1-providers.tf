@@ -6,17 +6,11 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 6.30.0"
     }
-    sops = {
-      source  = "carlpett/sops"
-      version = "~> 1.0"
-    }
   }
 }
 
 provider "aws" {
-  region     = var.region
-  access_key = data.sops_file.secrets.data["aws.access_key"]
-  secret_key = data.sops_file.secrets.data["aws.secret_key"]
+  region     = local.region
 
   skip_credentials_validation = true
   skip_requesting_account_id  = true
