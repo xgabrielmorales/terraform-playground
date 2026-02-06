@@ -12,11 +12,6 @@
     in {
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = with pkgs; [ awscli2 terraform sops age ];
-
-        shellHook = ''
-          export SOPS_AGE_KEY_FILE="$(git rev-parse --show-toplevel)/keys.txt"
-          export $(sops --decrypt --output-type dotenv secrets.yml)
-        '';
       };
     };
 }
